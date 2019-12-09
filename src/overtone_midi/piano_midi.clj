@@ -68,8 +68,6 @@
   "Plays event on piano at specified time. "
 
   [{:keys [note velocity duration] :as event} time]
-  (println event)
-  (println "Plays " note " whith velocity " velocity " for "  (/ duration 1000 ) )
   (live/at time
     (piano
           :note note
@@ -77,7 +75,8 @@
           :sustain (.floatValue (/ duration 1000) ))))
 
 (defn play-on-piano
-  "Plays sequence of events on piano."
+  "Plays sequence of events on piano.
+   Make it faster/slower by using tempo."
 
   ([events] (play-on-piano events 1))
   ([events tempo]
@@ -89,7 +88,6 @@
           next-time           (+ time in-between-time)]
       (when (not (nil? actuals))
         (do
-          (println "In between time " in-between-time)
           (doall
             (map #(live-piano % time) actuals))
           (recur next-time next (rest ev-rest))))))))
@@ -97,4 +95,4 @@
 
 (comment
   (def midif (midi "love-dream"))
-  (play-on-piano (take 300 (parse-midi midif))))
+  (play-on-piano (parse-midi midif))))

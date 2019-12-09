@@ -1,10 +1,40 @@
 # overtone-midi
 
-A Clojure library designed to ... well, that part is up to you.
+Resources to handle midi files when livecoding with Overtone.
 
+## Dependencies
+  
+  [Overtone](https://github.com/overtone/overtone)
+  
+  
+  It is recommended to use [emacs-live](https://github.com/overtone/emacs-live)
+  
 ## Usage
 
-FIXME
+
+### MIDI file -> piano
+
+
+  Parse midi file to be played by overtone piano.
+  
+  Example:
+    
+    load namespace in REPL
+    
+      `(in-ns 'overtone-midi.piano-midi)`
+    
+    run
+    
+      `(-> "love-dream" midi parse-midi play-on-piano)`
+     
+If you are a piano player you can record yourself using [piano->MIDI](https://piano-scribe.glitch.me/).
+
+Add it to ``` /resources/midis ```
+
+
+**Use it for livecoding :purple_heart:**
+
+
 
 ## License
 

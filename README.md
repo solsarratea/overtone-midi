@@ -11,21 +11,23 @@ Resources to handle midi files when livecoding with Overtone.
   
 ## Usage
 
+### Init
+  
+  Run ´lein repl´
+  Once session is started, run ´(load)´ for loading dependencies and namespaces.
+  
+  
+### Dev 
+  Run ´(tools/refresh)´ to reload namespaces
+
 
 ### MIDI file -> piano
-
 
   Parse midi file to be played by overtone piano.
   
   Example:
     
-    load namespace in REPL
-    
-      `(in-ns 'overtone-midi.piano-midi)`
-    
-    run
-    
-      `(-> "love-dream" midi parse-midi play-on-piano)`
+     (-> "love-dream" read-and-parse-midi play-on-piano)`
      
 If you are a piano player you can record yourself using [piano->MIDI](https://piano-scribe.glitch.me/).
 

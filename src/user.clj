@@ -1,7 +1,7 @@
 (ns user
-  (:require [clojure.tools.namespace.repl :as tools]))
+  (:require [clojure.tools.namespace.repl :refer :all]))
 
-(defn load 
+(defn -load 
   []
-  (tools/refresh))
+  (refresh))
 

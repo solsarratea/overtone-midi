@@ -3,32 +3,38 @@
 Resources to handle midi files when livecoding with Overtone.
 
 ## Dependencies
-  
+
   [Overtone](https://github.com/overtone/overtone)
-  
-  
+
+
   It is recommended to use [emacs-live](https://github.com/overtone/emacs-live)
-  
+
 ## Usage
 
 ### Init
-  
-  Run ´lein repl´
-  Once session is started, run ´(load)´ for loading dependencies and namespaces.
-  
-  
-### Dev 
-  Run ´(tools/refresh)´ to reload namespaces
+
+  Run ```lein repl```
+  Once session is started, run ```(-load)``` for loading namespaces.
+
+
+### Dev
+  You may use clojure.tools.namespace.repl.
+
+  Run ```refresh``` for updating namespaces.
 
 
 ### MIDI file -> piano
 
   Parse midi file to be played by overtone piano.
-  
-  Example:
-    
-     (-> "love-dream" read-and-parse-midi play-on-piano)`
-     
+#### Example:
+  Run comment lines in ``` overtone-midi.piano-midi ```
+
+  Or either run in REPL:
+
+     (in-ns 'overtone-midi.piano-midi)  
+
+     (-> "love-dream" parser/read-and-parse-midi play-on-piano)`
+
 If you are a piano player you can record yourself using [piano->MIDI](https://piano-scribe.glitch.me/).
 
 Add it to ``` /resources/midis ```

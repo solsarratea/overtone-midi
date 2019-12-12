@@ -8,6 +8,7 @@
   "Plays event on piano at specified time. "
 
   [{:keys [note velocity duration] :as event} time]
+  (println "Plays " note "with velocity " velocity "and duration " duration)
   (live/at time
     (piano
           :note note
@@ -37,7 +38,8 @@
 
 
 (comment
-  (play-on-piano (parser/read-and-parse-midi "love-dream")))
+  (-> "Hey" parser/read-and-parse-midi (play-on-piano 1.2)
+  (-> "love-dream" parser/read-and-parse-midi (play-on-piano 1))))
 
 
 (play-on-piano (parser/read-and-parse-midi "Tian"  ) 8)

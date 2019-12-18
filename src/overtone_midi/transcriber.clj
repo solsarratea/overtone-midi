@@ -13,7 +13,7 @@
 
 (defn- add-time
   [events tempo]
-  (println "tempo" tempo)
+
   (let [processed-events (atom (seq []))]
     (loop [ time        (now)
            [t0 actuals] (first events)
@@ -25,7 +25,6 @@
           (when-not (nil? actuals)
             (do
               (swap! processed-events concat (map (fn [event] (assoc event :in-between-time in-between-time) ) actuals))
-              (println (count @processed-events))
               (recur next-time next (rest ev-rest))))))
       )
     (vec @processed-events)))
@@ -46,10 +45,12 @@
 (defn to-code
   [{:keys [midi-events tempo file-name]}]
 
+  (let [namesp (symbol (str "overtone-midi." file-name))
+        number (if (find-ns namesp) (count (clojure.repl/dir-fn namesp)) 0)]
   (with-open [w (io/writer (str "src/overtone_midi/" file-name ".clj") :append true)]
     (.write w (namespace-header file-name))
-    (.write w "\n(defn play \n[]  \n ")
+    (.write w (str "\n(defn sample-" number  " \n[]  \n "))
     (.write w    " (let [time (atom (now))]  \n")
     (doall (map #(.write w (event2code %))  (add-time midi-events tempo)))
     (.write w "nil))")
-    ))
+    )))

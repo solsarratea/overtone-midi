@@ -1,6 +1,7 @@
 (ns user
   (:require [clojure.tools.namespace.repl :refer :all]
             [clojure.java.io :as io]
+            [clojure.edn :as edn]
             [overtone-midi.parser :refer [read-and-parse-midi]]
             [overtone-midi.transcriber :refer [to-code]]))
 
@@ -11,15 +12,18 @@
 (defn- select-tempo
   [atom]
   (println "Enter number for altering tempo: default is 1")
-  (let [val (Float/parseFloat (read-line))]
-    (println val (int? val))
-    (swap! atom assoc :tempo (if (int? val) val 1))))
+  (let [val (edn/read-string (read-line))
+        tempo (if (number? val) val 1)]
+    (swap! atom assoc :tempo tempo)
+    (println tempo)))
 
 
 (defn- select-name
   [atom]
   (println "Enter midi file name")
-  (swap! atom assoc :file-name (read-line)))
+  (let [name (read-line)]
+    (swap! atom assoc :file-name name)
+    (println name)))
 
 (defn- select-bounds
   [atom size]
@@ -27,9 +31,13 @@
   (if-not (= (read-line) "n")
     (do
       (println "From: ")
-      (swap! atom assoc :lower-bound (Integer/parseInt (read-line)))
+      (let [low (Integer/parseInt (read-line))]
+        (swap! atom assoc :lower-bound low )
+        (println low))
       (println "To: ")
-      (swap! atom assoc :upper-bound (Integer/parseInt (read-line))))))
+      (let [up (Integer/parseInt (read-line))]
+        (swap! atom assoc :upper-bound up)
+        (println up)))))
 
 
 (defn- midis-resources

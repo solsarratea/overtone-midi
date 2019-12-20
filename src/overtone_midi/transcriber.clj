@@ -1,5 +1,6 @@
 (ns overtone-midi.transcriber
   (:require [overtone-midi.parser :as parser]
+            [clojure.repl :refer [dir-fn]]
             [overtone.music.time :refer [now]]
             [clojure.java.io :as io]))
 
@@ -46,7 +47,7 @@
   [{:keys [midi-events tempo file-name]}]
 
   (let [namesp (symbol (str "overtone-midi." file-name))
-        number (if (find-ns namesp) (count (clojure.repl/dir-fn namesp)) 0)]
+        number (if (find-ns namesp) (count (dir-fn namesp)) 0)]
   (with-open [w (io/writer (str "src/overtone_midi/" file-name ".clj") :append true)]
     (.write w (namespace-header file-name))
     (.write w (str "\n(defn sample-" number  " \n[]  \n "))

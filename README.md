@@ -40,9 +40,20 @@ If you are a piano player you can record yourself using [piano->MIDI](https://pi
 Add it to ``` /resources/midis ```
 
 ### MIDI file -> code
+ 
+Use REPL to select interval of MIDI-file to parse, and transcribe it into a namespace.
 
-Select interval of MIDI-file to parse, and transcribe it into a new namespace.
-Use created function to play sample.
+Run
+  ```(midi2code)```
+
+Set configuration: 
+  - select MIDI file from resources 
+  - bounds of interval
+  - tempo (scale factor for duration of events).
+
+You may play sample, and edit it until you get what you need.
+
+Once you end up with editing, use created function to play sample.
  
 <a href="https://midilosaurus.glitch.me?wvideo=6hu3nk5js0"><img src="https://embedwistia-a.akamaihd.net/deliveries/761cab5c843dcac3a8a254150db39311.jpg?wistia-6hu3nk5js0-1-6hu3nk5js0-video-thumbnail=1&amp;image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=cf00e4e0" width="400" height="225" style="width: 400px; height: 225px;"></a>
 
